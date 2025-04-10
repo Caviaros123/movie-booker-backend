@@ -15,6 +15,6 @@ CREATE POLICY "Screenings are viewable by everyone"
     ON public.screenings FOR SELECT
     USING (true);
 
-CREATE POLICY "Only admins can manage screenings"
+CREATE POLICY "Only authenticated users can manage screenings"
     ON public.screenings FOR ALL
-    USING (auth.role() = 'authenticated' AND auth.uid() IN (SELECT id FROM public.profiles WHERE role = 'admin')); 
+    USING (auth.role() = 'authenticated'); 

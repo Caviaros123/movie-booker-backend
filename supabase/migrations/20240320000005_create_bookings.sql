@@ -23,6 +23,6 @@ CREATE POLICY "Users can update their own bookings"
     ON public.bookings FOR UPDATE
     USING (auth.uid() = user_id);
 
-CREATE POLICY "Only admins can manage all bookings"
+CREATE POLICY "Only authenticated users can manage all bookings"
     ON public.bookings FOR ALL
-    USING (auth.role() = 'authenticated' AND auth.uid() IN (SELECT id FROM public.profiles WHERE role = 'admin')); 
+    USING (auth.role() = 'authenticated'); 

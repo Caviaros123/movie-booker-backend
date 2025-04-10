@@ -16,6 +16,6 @@ CREATE POLICY "Movies are viewable by everyone"
     ON public.movies FOR SELECT
     USING (true);
 
-CREATE POLICY "Only admins can manage movies"
+CREATE POLICY "Only authenticated users can manage movies"
     ON public.movies FOR ALL
-    USING (auth.role() = 'authenticated' AND auth.uid() IN (SELECT id FROM public.profiles WHERE role = 'admin')); 
+    USING (auth.role() = 'authenticated'); 

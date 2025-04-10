@@ -13,6 +13,6 @@ CREATE POLICY "Screens are viewable by everyone"
     ON public.screens FOR SELECT
     USING (true);
 
-CREATE POLICY "Only admins can manage screens"
+CREATE POLICY "Only authenticated users can manage screens"
     ON public.screens FOR ALL
-    USING (auth.role() = 'authenticated' AND auth.uid() IN (SELECT id FROM public.profiles WHERE role = 'admin')); 
+    USING (auth.role() = 'authenticated'); 
