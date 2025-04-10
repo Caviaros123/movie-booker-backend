@@ -19,4 +19,12 @@ export class AppController {
       authenticated_user: req.user,
     };
   }
+
+  @Get('/htlz')
+  health() {
+    return {
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+    };
+  }
 }
