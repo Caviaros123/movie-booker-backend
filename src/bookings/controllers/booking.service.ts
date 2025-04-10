@@ -38,7 +38,7 @@ export class BookingService {
     });
   }
 
-  deleteBooking(id: string) {
-    return this.bookingsRepository.delete(id);
+  deleteBooking(id: string, userId: string) {
+    return this.bookingsRepository.delete(id, userId);
   }
 }

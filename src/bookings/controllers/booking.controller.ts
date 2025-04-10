@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -108,5 +109,15 @@ export class BookingsController {
   })
   getBooking(@Param('id') id: string, @Request() req) {
     return this.bookingService.getBooking(id, req.user.id as string);
+  }
+
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({
+    summary: 'Annuler une réservation',
+    description: "Permet d'annuler une réservation existante",
+  })
+  cancelBooking(@Param('id') id: string, @Request() req) {
+    return this.bookingService.deleteBooking(id, req.user.id as string);
   }
 }

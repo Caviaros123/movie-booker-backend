@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SupabaseService } from '../../core/services/supabase.service';
 import { BookingsRepository } from '../repositories/bookings.repository';
-import { BookingsService } from '../services/bookings.service';
 import { BookingsController } from './booking.controller';
+import { BookingService } from './booking.service';
 
 describe('BookingsController', () => {
   let controller: BookingsController;
-  let service: BookingsService;
+  let service: BookingService;
 
   const mockBookingsService = {
     create: jest.fn(),
@@ -20,7 +20,7 @@ describe('BookingsController', () => {
       controllers: [BookingsController],
       providers: [
         {
-          provide: BookingsService,
+          provide: BookingService,
           useValue: mockBookingsService,
         },
         {
@@ -35,7 +35,7 @@ describe('BookingsController', () => {
     }).compile();
 
     controller = module.get<BookingsController>(BookingsController);
-    service = module.get<BookingsService>(BookingsService);
+    service = module.get<BookingService>(BookingService);
   });
 
   afterEach(() => {
@@ -76,7 +76,7 @@ describe('BookingsController', () => {
 
       mockBookingsService.findAll.mockResolvedValue(mockResponse);
 
-      const result = await controller.findAll({ user: { id: userId } });
+      const result = await controller.getMyBookings({ user: { id: userId } });
 
       expect(result).toEqual(mockResponse);
       expect(mockBookingsService.findAll).toHaveBeenCalledWith(userId);
@@ -91,7 +91,7 @@ describe('BookingsController', () => {
 
       mockBookingsService.findOne.mockResolvedValue(mockResponse);
 
-      const result = await controller.findOne(id, { user: { id: userId } });
+      const result = await controller.getBooking(id, { user: { id: userId } });
 
       expect(result).toEqual(mockResponse);
       expect(mockBookingsService.findOne).toHaveBeenCalledWith(id, userId);
@@ -106,7 +106,9 @@ describe('BookingsController', () => {
 
       mockBookingsService.cancel.mockResolvedValue(mockResponse);
 
-      const result = await controller.cancel(id, { user: { id: userId } });
+      const result = await controller.cancelBooking(id, {
+        user: { id: userId },
+      });
 
       expect(result).toEqual(mockResponse);
       expect(mockBookingsService.cancel).toHaveBeenCalledWith(id, userId);

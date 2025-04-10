@@ -25,7 +25,12 @@ import { TmdbService } from './movies/services/tmdb.service';
     BookingModule,
     MoviesModule,
   ],
-  controllers: [AppController, MoviesController, BookingsController, HealthController],
+  controllers: [
+    AppController,
+    MoviesController,
+    BookingsController,
+    HealthController,
+  ],
   providers: [
     AppService,
     MoviesService,

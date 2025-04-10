@@ -114,12 +114,13 @@ export class BookingsRepository {
     if (error) throw error;
   }
 
-  async delete(id: string) {
+  async delete(id: string, userId: string) {
     const { error } = await this.supabase
       .getClient()
       .from('bookings')
       .delete()
-      .eq('id', id);
+      .eq('id', id)
+      .eq('user_id', userId);
 
     if (error) throw error;
     return { message: 'Booking deleted successfully' };
