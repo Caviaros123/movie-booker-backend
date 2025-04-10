@@ -3,14 +3,14 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { BookingController } from './booking/booking.controller';
-import { BookingModule } from './booking/booking.module';
-import { BookingService } from './booking/booking.service';
+import { BookingsController } from './bookings/controllers/booking.controller';
+import { BookingModule } from './bookings/controllers/booking.module';
+import { BookingService } from './bookings/controllers/booking.service';
+import { BookingsRepository } from './bookings/repositories/bookings.repository';
 import { CoreModule } from './core/core.module';
-import { MoviesController } from './movies/movies.controller';
-import { MoviesModule } from './movies/movies.module';
-import { MoviesService } from './movies/movies.service';
-
+import { MoviesController } from './movies/controllers/movies.controller';
+import { MoviesModule } from './movies/controllers/movies.module';
+import { MoviesService } from './movies/controllers/movies.service';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -21,7 +21,7 @@ import { MoviesService } from './movies/movies.service';
     BookingModule,
     MoviesModule,
   ],
-  controllers: [AppController, MoviesController, BookingController],
-  providers: [AppService, MoviesService, BookingService],
+  controllers: [AppController, MoviesController, BookingsController],
+  providers: [AppService, MoviesService, BookingService, BookingsRepository],
 })
 export class AppModule {}

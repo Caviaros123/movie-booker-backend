@@ -1,4 +1,4 @@
-import { Global, Module } from '@nestjs/common';
+import { DynamicModule, Global, Module } from '@nestjs/common';
 import { SupabaseService } from './services/supabase.service';
 
 @Global()
@@ -6,4 +6,12 @@ import { SupabaseService } from './services/supabase.service';
   providers: [SupabaseService],
   exports: [SupabaseService],
 })
-export class CoreModule {}
+export class CoreModule {
+  static forRoot(): DynamicModule {
+    return {
+      module: CoreModule,
+      providers: [SupabaseService],
+      exports: [SupabaseService],
+    };
+  }
+}
