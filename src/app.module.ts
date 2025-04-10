@@ -11,6 +11,7 @@ import { CoreModule } from './core/core.module';
 import { MoviesController } from './movies/controllers/movies.controller';
 import { MoviesModule } from './movies/controllers/movies.module';
 import { MoviesService } from './movies/controllers/movies.service';
+import { TmdbService } from './movies/services/tmdb.service';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -22,6 +23,12 @@ import { MoviesService } from './movies/controllers/movies.service';
     MoviesModule,
   ],
   controllers: [AppController, MoviesController, BookingsController],
-  providers: [AppService, MoviesService, BookingService, BookingsRepository],
+  providers: [
+    AppService,
+    MoviesService,
+    BookingService,
+    BookingsRepository,
+    TmdbService,
+  ],
 })
 export class AppModule {}
